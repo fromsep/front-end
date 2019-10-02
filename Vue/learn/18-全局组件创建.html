@@ -1,0 +1,47 @@
+<html>
+
+<head></head>
+<script src="./public/vue.js"></script>
+
+<body>
+    <div id="app">
+        <extend-com></extend-com>
+        <br>
+        <mycomponent></mycomponent>
+        <br>
+        <com3></com3>
+    </div>
+
+    <!-- 在#app外面创建组件 -->
+    <template id="tmp3">
+        <div>
+            <h3>3.这是使用template创建的组件</h3>
+            <h1>哈哈哈</h1>
+        </div>
+    </template>
+
+</body>
+<script>
+    // 创建的组件 有且只有一个根元素
+
+    // 1. 使用extend 创建组件
+    Vue.component('extend-com', Vue.extend({
+        template: "<h1>1. 这是使用vue.extend创建的组件</h1>",
+    }));
+
+    // 2. 使用component 创建组件
+    Vue.component('mycomponent', {
+        template: "<div><h1>2. 这是使用vue.component创建的组件</h1><span>M</span></div>",
+    });
+
+    // 3. 使用template 创建组件
+    Vue.component('com3', {
+        template: "#tmp3"
+    });
+
+    var vm = new Vue({
+        el: '#app'
+    });
+</script>
+
+</html>

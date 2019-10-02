@@ -1,0 +1,40 @@
+<html>
+<head></head>
+<script src="./public/vue.js"></script>
+<body>
+    <div id="app">
+        <counter></counter>
+
+        <counter></counter>
+    </div>
+
+    <template id="my-counter">
+        <div>
+            <input type="button" value="+1" @click="add">
+            <h4>{{count}}</h4>
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            components: {
+                'counter': {
+                    template: '#my-counter',
+                    // 组件里的data 使用函数返回是为了避免全局变量影响 重复引入的组件
+                    data: function() {
+                        return {
+                            count: 0
+                        };
+                    },
+                    methods: {
+                        add() {
+                            this.count++;
+                        },
+                    },
+                }
+            }
+        });
+    </script>
+</body>
+</html>

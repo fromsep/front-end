@@ -1,0 +1,25 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>{{message}}</div>
+            <!-- v-bind只能实现数据的单项绑定 -->
+            <input type="text" v-bind:value="message">
+            <br>
+            
+            <!-- v-model可实现双向绑定，但是只能用于表单元素 -->
+            <input type="text" v-model:value="message">
+
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                message:'这是message',
+            },
+        });
+    
+    </script>
+</html>

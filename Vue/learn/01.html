@@ -1,0 +1,30 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <span>{{messaege}}</span>
+            <div v-text="messaege"></div>
+            <div v-html="messaege"></div>
+            <input type="button" value="按钮" v-bind:title="button_title">
+            <input type="button" value="按钮" :title="button_title + '1111'">
+            <br>
+            <input type="button" v-on:mouseover="click">
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                messaege:'这是message',
+                button_title:"这是button_title"
+            },
+            methods:{
+                click: function() {
+                    alert("hello");
+                },
+            }
+        });
+    
+    </script>
+</html>

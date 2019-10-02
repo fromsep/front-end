@@ -1,0 +1,50 @@
+<html>
+<head></head>
+<script src="./public/vue.js"></script>
+<style>
+    .v-enter,
+    .v-leave-to {
+        opacity: 0;
+        transform: translateX(150px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+        transition: all 0.5s ease;
+    }
+</style>
+<body>
+    <div id="app">
+        <a href="" @click.prevent="doAction('login')">登录</a>
+        <a href="" @click.prevent="doAction('register')">注册</a>
+
+        <!-- mode out-in 前一个出去，后一个再进来 -->
+        <transition mode="out-in">
+            <component :is = "action"></component>
+        </transition>
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                action: "login"
+            },
+            methods: {
+                doAction(action) {
+                    this.action = action
+                },
+            },
+            components: {
+                login: {
+                    template: "<h1>登录组件</h1>"
+                },
+                register: {
+                    template: "<h1>注册组件</h1>"
+                }
+            }
+        });
+    </script>
+</body>
+</html>

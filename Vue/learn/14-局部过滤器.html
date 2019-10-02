@@ -1,0 +1,58 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>{{dateStr | dateFormat('yyyy-mm-dd 2')}}</div>
+        </div>
+    </body>
+    <script>
+        // 全局过滤器
+        Vue.filter('dateFormat', function(dateStr, option='') {
+            var dt = new Date(dateStr);
+
+            var year = dt.getFullYear();
+            var month = dt.getMonth() + 1;
+            var day = dt.getDay();
+
+            if(option.toLowerCase() == 'yyyy-mm-dd 9') {
+                return `${year}-${month}-${day}`
+            }
+
+            var hour = dt.getHours();
+            var min = dt.getMinutes();
+            var seconds = dt.getSeconds();
+
+            return `${year}-${month}-${day} ${hour}:${min}:${seconds}`;
+        });
+
+        // 局部过滤器
+        // 过滤器同名情况下，优先调用局部过滤器
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                dateStr: new Date(),
+            },
+            filters: {
+                dateFormat(dateStr, option='') {
+                    var dt = new Date(dateStr);
+
+                    var year = dt.getFullYear();
+                    var month = (dt.getMonth() + 1).toString().padStart(2, '0');
+                    var day = (dt.getDay()).toString().padStart(2, '0');
+
+                    if(option.toLowerCase() == 'yyyy-mm-dd') {
+                        return `${year}-${month}-${day}**********`
+                    }
+
+                    var hour = (dt.getHours()).toString().padStart(2, '0');
+                    var min = (dt.getMinutes()).toString().padStart(2, '0');
+                    var seconds = (dt.getSeconds()).toString().padStart(2, '0');
+
+                    return `${year}-${month}-${day} ${hour}:${min}:${seconds}***********`;
+                }
+            }
+        });
+    
+    </script>
+</html>

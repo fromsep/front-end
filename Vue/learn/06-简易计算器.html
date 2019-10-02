@@ -1,0 +1,49 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <input type="text" v-model:value="number1" name="number1">
+            <select name="" v-model:value="option">
+                <option value="+">+</option>
+                <option value="+">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <input type="text" v-model:value="number2" name="number2">
+            <input type="button" value="=" @click="calc">
+            <input type="text" v-model:value="result" name="result">
+
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                number1: 0,
+                number2: 0,
+                result: 0,
+                option: "+"
+            },
+            methods: {
+                "calc": function() {
+                    switch(this.option) {
+                        case "+":
+                        this.result = parseInt(this.number1) + parseInt(this.number2);
+                        break;
+                        case "-":
+                        this.result = parseInt(this.number1) -parseInt(this.number2);
+                        break;
+                        case "*":
+                        this.result = parseInt(this.number1) * parseInt(this.number2);
+                        break;
+                        case "/":
+                        this.result = parseInt(this.number1) / parseInt(this.number2);
+                        break;
+                    }
+                }
+            }
+        });
+    
+    </script>
+</html>

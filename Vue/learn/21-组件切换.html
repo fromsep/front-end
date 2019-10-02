@@ -1,0 +1,35 @@
+<html>
+<head></head>
+<script src="./public/vue.js"></script>
+<body>
+    <div id="app">
+        <a href="" @click.prevent="doAction('login')">登录</a>
+        <a href="" @click.prevent="doAction('register')">注册</a>
+
+        <component :is = "action"></component>
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                action: "login"
+            },
+            methods: {
+                doAction(action) {
+                    this.action = action
+                },
+            },
+            components: {
+                login: {
+                    template: "<h1>登录组件</h1>"
+                },
+                register: {
+                    template: "<h1>注册组件</h1>"
+                }
+            }
+        });
+    </script>
+</body>
+</html>

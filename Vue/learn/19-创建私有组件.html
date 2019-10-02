@@ -1,0 +1,29 @@
+<html>
+<head></head>
+<script src="./public/vue.js"></script>
+<body>
+    <div id="app">
+        <login></login>
+    </div>
+
+    <template id="login-tmp">
+        <div>
+            <h1>这是私有的login组件</h1>
+            name: <input type="text">
+            <br>
+            password: <input type="text">
+        </div>
+    </template>
+
+    <script>
+            var vm = new Vue({
+                el: '#app',
+                components: {
+                    'login': {
+                        template: '#login-tmp'
+                    }
+                }
+            });
+        </script>
+</body>
+</html>

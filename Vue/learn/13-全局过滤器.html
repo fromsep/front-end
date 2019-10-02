@@ -1,0 +1,41 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>{{dateStr | dateFormat('yyyy-mm-dd 2') | addTail}}</div>
+        </div>
+    </body>
+    <script>
+        // 全局过滤器
+        Vue.filter('dateFormat', function(dateStr, option) {
+            var dt = new Date(dateStr);
+
+            var year = dt.getFullYear();
+            var month = dt.getMonth() + 1;
+            var day = dt.getDay();
+
+            if(option.toLowerCase() == 'yyyy-mm-dd') {
+                return `${year}-${month}-${day}`
+            }
+
+            var hour = dt.getHours();
+            var min = dt.getMinutes();
+            var seconds = dt.getSeconds();
+
+            return `${year}-${month}-${day} ${hour}:${min}:${seconds}`;
+        });
+
+        Vue.filter('addTail', function(data) {
+            return `${data}++++++++++`
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                dateStr: new Date(),
+            },
+        });
+    
+    </script>
+</html>

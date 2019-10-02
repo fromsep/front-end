@@ -1,0 +1,59 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <input type="text" v-model:value="message" v-focus v-color="'blue'">
+            <div v-font="50" v-bgColor="'yellow'">{{message}}</div>
+        </div>
+    </body>
+    <script>
+        // 公共指令
+        Vue.directive('focus', {
+            bind: function(el) {
+                console.log(el)
+            },
+            // 和js行为有关的一般放在inserted中执行
+            inserted: function(el) {
+                el.focus();
+            },
+            updated: function(el) {},
+        });
+
+        Vue.directive('color', {
+
+            // 和样式有关的一般放在bind中执行
+            bind: function(el, binding) {
+                el.style.color = binding.value;
+            },
+            inserted: function(el) {},
+            updated: function(el) {},
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: "hello",
+            },
+
+            // 私有指令
+            directives: {
+                'font': {
+                    bind: function(el, binding) {
+                        el.style.fontWeight = binding.value;
+                    },
+                    inserted: function(el) {},
+                    updated: function(el) {},
+                },
+
+                // 当钩子函数只在 bind 和 inserted 情况下生效时 可进行如下简写
+                'bgcolor': function(el, binding) {
+                    el.style.width = '50px';
+                    el.style.height = '50px';
+                    el.style.backgroundColor = binding.value;
+                }
+            }
+        });
+    
+    </script>
+</html>

@@ -1,0 +1,105 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>
+                id:<input type="text" v-model:value="id">
+                name:<input type="text" v-model:value="name">
+                <input type="button" value="添加" @click="addUser">
+                <input type="text" name="" id="" v-model:value = "keyword">
+            </div>
+            <br>
+            <table border="1">
+                <head>
+                    <td>id</td>
+                    <td>姓名</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </head>
+                <body>
+                    <tr v-for="user in searchUser(keyword)" :key="user.id">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.create_time }}</td>
+                        <td>
+                            <a href="" @click.prevent="deleteUser(user.id)">删除</a>
+                        </td>
+                    </tr>
+                </body>
+            </table>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id:'',
+                name:'',
+                keyword:'',
+                users: [
+                    {
+                        id: 1,
+                        name: 'admin',
+                        create_time: "2019-08-01 00:00:00"
+                    },
+                    {
+                        id: 2,
+                        name: 'wcm',
+                        create_time: "2019-08-02 00:00:00"
+                    }
+                ]
+            },
+            methods: {
+                addUser(){
+                    var newUser = {
+                        id: this.id,
+                        name: this.name,
+                        create_time: new Date(),
+                    };
+                    this.users.push(newUser);
+                    this.id = '';
+                    this.name = '';
+                },
+                deleteUser(userId) {
+                    // this.users.some((user, i) => {
+                    //     if(user.id == userId) {
+                    //         this.users.splice(i, 1);
+                    //         return true;
+                    //     }
+                    // });
+
+                    var index = this.users.findIndex((user) => {
+                        if(user.id == userId) {
+                            return true;
+                        }
+                    });
+                    this.users.splice(index, 1);
+                },
+                searchUser(keyword) {
+                    if (keyword == '') {
+                        return this.users;
+                    }
+
+                    var result = [];
+
+                    // forEach some filter findIndex 都是数组的新方法
+                    // this.users.some((user) => {
+                    //     if(user.name.indexOf(keyword) != -1) {
+                    //         result.push(user);
+                    //     }
+                    // });
+
+                    this.users.filter((user) => {
+                        if(user.name.includes(keyword)) {
+                            result.push(user);
+                        }
+                    });
+
+                    return result;
+                },
+            }
+        });
+    
+    </script>
+</html>

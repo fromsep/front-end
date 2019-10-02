@@ -1,0 +1,38 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <body>
+        <div id="app">
+            <input type="button" value="GET" @click="getInfo">
+            <input type="button" value="POST" @click="postInfo">
+            <input type="button" value="jsonP" @click="jsonP">
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: "hello",
+            },
+            methods: {
+                getInfo() {
+                    this.$http.get("http://vue.studyit.io/api/getlunbo", {}).then(function($result) {
+                        console.log(result)
+                    });
+                },
+                postInfo() {
+                    this.$http.post("http://vue.studyit.io/api/post", {emulateJSON:true}).then(function($result) {
+                        console.log(result)
+                    });
+                },
+                jsonP() {
+                    this.$http.get("http://vue.studyit.io/api/jsonp", {}).then(function($result) {
+                        console.log(result)
+                    });
+                },
+            }
+        });
+    
+    </script>
+</html>

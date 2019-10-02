@@ -1,0 +1,38 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <input type="button" value="run" v-on:click="run">
+            <input type="button" value="stop" v-on:click="stop">
+            <div v-text="messaege"></div>
+            <div>{{this.interval_id}}</div>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                messaege:'这是一段跑马灯文字！',
+                interval_id:null,
+            },
+            methods:{
+                run: function() {
+                    if(this.interval_id != null) {
+                        return;
+                    }
+                    this.interval_id = setInterval( () => {
+                        var start = this.messaege.substring(0,1);
+                        var rest = this.messaege.substring(1);
+                        this.messaege = rest + start;
+                    }, 10);
+                },
+                stop: function() {
+                    clearInterval(this.interval_id);
+                    this.interval_id = null;
+                }
+            }
+        });
+    
+    </script>
+</html>

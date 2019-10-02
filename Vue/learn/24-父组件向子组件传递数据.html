@@ -1,0 +1,38 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>{{message}}</div>
+            <!-- 父组件通过属性绑定方式先子组件传值 -->
+            <children-com v-bind:parrentmessage="message"></children-com>
+        </div>
+
+
+
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data: {
+                    message:"父组件数据",
+                },
+                components: {
+                    childrenCom: {
+                        data() {
+                            return {
+                                info: "子组件数据",
+                            }
+                        },
+                        template: '<div> <button @click="change">修改传值</button> <h1>{{parrentmessage}}</h1> <h3>{{info}}</h3> </div>',
+                        props: ["parrentmessage"],  // 父组件传递过来的值 是只读的
+                        methods: {
+                            change() {
+                                this.parrentmessage = "修改后的父组件传值"
+                            }
+                        },
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

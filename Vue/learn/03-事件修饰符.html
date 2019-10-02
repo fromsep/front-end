@@ -1,0 +1,78 @@
+<html>
+    <head></head>
+    <style>
+        .outer {
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            padding: 2px;
+        }
+        .inner {
+            height: 50px;
+            width: 50px;
+            padding: 5px;
+            background-color: white;
+        }
+    </style>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div class="outer" @click="outerClick">
+                <!-- .stop 阻止事件冒泡 -->
+                <div class="inner" @click.stop="innerClick"></div>
+            </div>
+
+            <!-- .prevent 阻止默认行为 -->
+            <a href="http://baidu.com" @click.prevent="linkClick">go百度</a>
+
+            <!-- .capture 捕获触发事件 -->
+            <div class="outer" @click.capture="outerClick">
+                <!-- .stop 阻止事件冒泡 -->
+                <div class="inner" @click.stop="innerClick"></div>
+            </div>
+            
+            <br>
+            <!-- .self 只有点击当前元素时才触发事件 -->
+            <div class="outer" @click.self="outerClick">
+                <!-- .stop 阻止事件冒泡 -->
+                <div class="inner" @click.stop="innerClick"></div>
+            </div>
+
+            <!-- .once 只触发一次事件 -->
+            <a href="http://baidu.com" @click.prevent.once="linkClick">go百度</a>
+
+            <!-- .self 只会阻止自身的事件 不会阻止事件冒泡 -->
+            <div class="outer" @click.capture="outerClick">
+                <div class="inner" @click.stop="innerClick">
+                    <input type="button" value="点击" @click="buttonClick">
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                messaege:'这是一段跑马灯文字！',
+                interval_id:null,
+            },
+            methods:{
+                outerClick:function() {
+                    console.log("outter click");
+                },
+                innerClick:function() {
+                    console.log("inner click");
+                },
+                linkClick: function() {
+                    console.log("链接点击事件");
+                },
+                buttonClick: function() {
+                    console.log("按钮点击");
+                }
+            }
+        });
+    
+    </script>
+</html>

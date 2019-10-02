@@ -1,0 +1,48 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>{{data}}</div>
+            <child-com @childshow="show"></child-com>
+        </div>
+
+        <template id="child-com">
+            <div>
+                <input type="button" value="点击" @click="myclick">
+                <h1>这是子组件</h1>
+            </div>
+        </template>
+
+
+        <script>
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    data: ""
+                },
+                methods: {
+                    show(data) {
+                        alert('这是父组件:')
+                        this.data = data
+                    }
+                },
+                components: {
+                    childCom: {
+                        data() {
+                            return {
+                                message: "来自子组件的message"
+                            }
+                        },
+                        template: "#child-com",
+                        methods: {
+                            myclick() {
+                                this.$emit('childshow', this.message)
+                            }
+                        },
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

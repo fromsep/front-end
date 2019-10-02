@@ -1,0 +1,53 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <!-- 遍历数组 -->
+            <div>
+                遍历数组
+                <ul>
+                    <li v-for="(color, i) in colorArr">[{{i}}] = {{color}}</li>
+                </ul>
+            </div>
+            <!-- 遍历对象数组 -->
+            <div>
+                遍历对象数组
+                <ul>
+                    <li v-for="(user, i) in userArr">[{{i}}] = {{user.name}},{{user.age}}</li>
+                </ul>
+            </div>
+            <!-- 遍历对象 -->
+            <div>
+                遍历对象
+                <ul>
+                    <li v-for="(val, k, i) in userInfo">[{{i}}] = {{k}}:{{val}}</li>
+                </ul>
+            </div>
+            <!-- 遍历数字 -->
+            <div>
+                遍历数字
+                <ul>
+                    <li v-for="(num,i) in 10">[{{i}}] = {{num}}</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                colorArr: ['red', 'green', 'yellow'],
+                userArr: [
+                    {name:'wcm',age: 27},
+                    {name:'wcm2',age: 25},
+                ],
+                userInfo: {
+                    name:'wcm',
+                    age: 27
+                }
+            }
+        });
+    
+    </script>
+</html>

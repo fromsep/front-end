@@ -1,0 +1,46 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <!-- 遍历数组 -->
+            <div>
+                <div>
+                    <input type="text" v-model:value="id">
+                    <input type="text" v-model:value="name">
+                    <input type="button" value="Add" @click="addUser">
+                </div>
+                遍历数组
+                <ul>
+                    <li v-for="user in userArr" :key="user.id">
+                        <input type="checkbox" name="" id="">
+                        [{{user.id}}] = {{user.name}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                id:'',
+                name:'',
+                userArr: [
+                    {id:1, name:'wcm'},
+                    {id:2, name:'wcm2'},
+                ],
+            },
+            methods: {
+                addUser: function() {
+                    this.userArr.unshift({
+                        id:this.id,
+                        name: this.name
+                    });
+
+                }
+            }
+        });
+    
+    </script>
+</html>

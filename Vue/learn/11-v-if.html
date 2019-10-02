@@ -1,0 +1,28 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <input type="button" value="切换" @click="flag=!flag">
+
+            <!-- v-if 切换会重新删除创建元素吗，有较高的切换性能消耗 -->
+            <div v-if="flag">
+                显示 v-if
+            </div>
+
+            <!-- v-show 切换会切换显示样式，有较高的初始化性能消耗 -->
+            <div v-show="flag">
+                显示 v-show
+            </div>
+        </div>
+    </body>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                flag:true
+            }
+        });
+    
+    </script>
+</html>
