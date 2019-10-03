@@ -1,0 +1,75 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <div>
+                <pub-component v-on:aaa="pubok"></pub-component>
+                <ul>
+                    <li v-for = "comment in comments" :key = "comment.id">
+                        {{comment.user}}说: {{comment.content}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <template id="pub">
+            <div>
+                <label for="user">姓名</label>
+                <input type="text" id="user" v-model="user">
+                <br>
+                <label for="content">内容</label>
+                <input type="text" id="content" v-model="content">
+                <input type="button" value="发表" @click="pub">
+            </div>
+        </template>
+
+        <script>
+            var pubComponent = {
+                data() {
+                    return {
+                        id: '',
+                        user: '',
+                        content: '',
+                    }
+                },
+                template: "#pub",
+                methods: {
+                    pub() {
+                        var comment = {
+                            id: new Date().getTime() + Math.random(1000, 9999),
+                            user: this.user,
+                            content: this.content
+                        }
+                        
+                        console.log(comment)
+
+                        this.$emit('aaa', comment)
+                   }
+                },
+            };
+
+           var vm = new Vue({
+               el: "#app",
+               data: {
+                   comments: []
+               },
+               methods: {
+                   pubok(comment) {
+                        this.comments.unshift(comment),
+                        localStorage.setItem("comments", JSON.stringify(this.comments))
+                   },
+                   loadComments() {
+                       this.comments = JSON.parse(localStorage.getItem("comments" || "[]"))
+                   }
+               },
+               components: {
+                    pubComponent
+               },
+               created() {
+                   this.loadComments()
+               },
+           });
+        </script>
+    </body>
+</html>
