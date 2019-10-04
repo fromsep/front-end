@@ -1,0 +1,54 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <body>
+        <div id="app">
+            <input type="button" value="触发" @click="show" >
+            <span ref="msg" >父组件信息</span>
+
+            <login ref="mylogin"></login>
+        </div>
+
+        <template id="login_com">
+            <div>
+                这是子组件信息
+            </div>
+        </template>
+
+        <script>
+            var login = {
+                template: "#login_com",
+                data() {
+                    return {
+                        message: "子组件 data message"
+                    }
+                },
+                methods: {
+                    show() {
+                        alert(this.message)
+                    }
+                },
+            }
+
+            var vm = new Vue({
+                el: "#app",
+                data: {
+
+                },
+                methods: {
+                    show() {
+                        console.log(this.$refs)
+                        // alert(this.$refs.msg.innerText)
+
+                        // 可获取子组件数据 调用子组件方法
+                        console.log(this.$refs.mylogin.message)
+                        this.$refs.mylogin.show()
+                    }
+                },
+                components: {
+                    login
+                }
+            });
+        </script>
+    </body>
+</html>
