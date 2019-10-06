@@ -1,0 +1,54 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <script src="./public/vue-router.js"></script>
+    <body>
+        <div id="app">
+            <router-link to="/user">用户</router-link>
+
+            <router-view></router-view>
+        </div>
+
+        <template id="user">
+            <div>
+                <!-- 这里要手动加上父路由前缀 -->
+               <router-link to="/user/login">登录</router-link> 
+               <router-link to="/user/regist">注册</router-link> 
+               <router-view></router-view>
+            </div>
+        </template>
+
+        <script>
+            var user = {
+                template: "#user"
+            }
+
+            var login = {
+                template: "<h1>登录</h1>"
+            }
+
+            var regist = {
+                template: "<h1>注册</h1>"
+            }
+
+            var router = new VueRouter({
+                routes: [
+                    { 
+                        path:"/user", 
+                        component: user,
+                        children: [
+                            {path:"login", component: login},
+                            {path:"regist", component: regist},
+                        ]
+                    },
+                ]
+            })
+
+            var vm = new Vue({
+                el: "#app",
+                router: router,
+            });
+
+        </script>
+    </body>
+</html>

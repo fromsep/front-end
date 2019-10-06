@@ -1,0 +1,44 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <script src="./public/vue-router.js"></script>
+    <body>
+        <div id="app">
+            <!-- query方式传递路由参数 -->
+            <router-link to="/login?id=2&name=w">登录</router-link>
+
+            <router-link to="/regist/5/aaa">注册</router-link>
+
+            <router-view></router-view>
+        </div>
+
+        <script>
+            var login = {
+                template: "<h1>登录 id={{$route.query.id}} name={{$route.query.name}}</h1>",
+                created() {
+                    console.log(this.$route)
+                },
+            }
+            
+            var regist = {
+                template: "<h1>注册 id={{$route.params.id}} name={{$route.params.name}}</h1>",
+                created() {
+                    console.log(this.$route)
+                },
+            }
+
+            var  router = new VueRouter({
+                routes: [
+                    {path: "/login", component: login},
+                    {path: "/regist/:id/:name", component: regist},
+                ],
+            })
+
+            var vm = new Vue({
+                el: "#app",
+                data: {},
+                router: router
+            });
+        </script>
+    </body>
+</html>
