@@ -1,0 +1,48 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+    <script src="./public/vue-router.js"></script>
+    <body>
+        <div id="app">
+            <router-view name="top"></router-view>
+            <!-- <router-view name="left"></router-view>
+            <router-view name="right"></router-view> -->
+        </div>
+
+        <script>
+            var top = {
+                template: "<div>Top</div>",
+            }
+
+            var left = {
+                template: "<div>Left</div>",
+            }
+
+            var right = {
+                template: "<div>right</div>",
+            }
+
+
+            var router = new VueRouter({
+                routes: [
+                    {
+                        path: "/",
+                        components: {
+                            'top': top,
+                            'left': left,
+                            'right': right,
+                        }
+                    }
+                ]
+            })
+
+            const vm = new Vue({
+                el: "#app",
+                data: {
+                    msg: "dddd"
+                },
+                router: router
+            });
+        </script>
+    </body>
+</html>
