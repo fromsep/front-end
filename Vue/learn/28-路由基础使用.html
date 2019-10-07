@@ -2,12 +2,46 @@
     <head></head>
     <script src="./public/vue.js"></script>
     <script src="./public/vue-router.js"></script>
+
+    <style>
+        .router-link-active {
+            font-size: 50px;
+            color:red;
+            background-color: gray;
+        }
+        .my-active {
+            font-size: 50px;
+            color:blue;
+            background-color: gray;
+        }
+
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(140px)
+        }
+
+        .v-enter-active,
+        .v-enter-active {
+            transition: all 0.5s ease;
+        }
+
+    </style>
+
     <body>
         <div id="app">
             <a href="#/login">登录</a>
             <a href="#/register">注册</a>
 
-           <router-view></router-view>
+            <br>
+
+            <router-link to="/login" tag="span">登录</router-link>
+            <router-link to="/register">注册</router-link>
+
+            <transition mod="out-in">
+                <router-view></router-view>
+            </transition>
+
         </div>
 
         <script>
@@ -22,6 +56,14 @@
             var router = new VueRouter({
                 // 注意key
                 routes: [
+                    // {
+                    //     path: "/",
+                    //     component: login
+                    // },
+                    {
+                        path: "/",
+                        redirect: '/login'   // 重定向
+                    },
                     {
                         path: "/login",
                         component: login
@@ -30,7 +72,8 @@
                         path: "/register",
                         component: register
                     }
-                ]
+                ],
+                linkActiveClass: "my-active"
             });
 
 
