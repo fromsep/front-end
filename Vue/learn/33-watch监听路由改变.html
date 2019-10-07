@@ -1,0 +1,50 @@
+<html>
+    <script src="./public/vue.js"></script>
+    <script src="./public/vue-router.js"></script>
+<body>
+    <div id="app">
+        <div>
+            <h1>{{message}}</h1>
+        </div>
+        <router-link to="login">登录</router-link>
+        <router-link to="regist">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var login = {
+            template: "<h1>登录组件</h1>"
+        }
+
+        var regist = {
+            template: "<h1>注册组件</h1>"
+        }
+
+        var router = new VueRouter({
+            routes: [
+                {path:"/login", component: login},
+                {path:"/regist", component: regist}
+            ]
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                message:""
+            },
+            router,
+            watch: {
+                '$route.path': function(newVal, oldVal) {
+                    if(newVal == '/login') {
+                        this.message = "欢迎来到登录页面"
+                    }
+
+                    if(newVal == '/regist') {
+                        this.message = "欢迎来到注册页面"
+                    }
+                }
+            },         
+        });
+
+    </script>
+</body>
+</html>
