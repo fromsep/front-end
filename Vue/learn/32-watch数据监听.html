@@ -1,0 +1,32 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstnumber">
+        +
+        <input type="text" v-model="lastnumber">
+        =
+        <input type="text" v-model="result">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstnumber: 0,
+                lastnumber:0,
+                result:0
+            },
+            watch: {
+                firstnumber: function(newVal, oldVal) {
+                    this.result = parseInt(newVal) + parseInt(this.lastnumber);
+                },
+                lastnumber: function(newVal, oldVal) {
+                    this.result = parseInt(this.firstnumber) + parseInt(newVal);
+                }
+            },
+        });
+    
+    </script>
+</body>
+</html>

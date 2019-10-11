@@ -1,0 +1,31 @@
+<html>
+    <head></head>
+    <script src="./public/vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" v-model="firstnumber">
+        +
+        <input type="text" v-model="lastnumber">
+        =
+        <input type="text" v-model="result">
+
+        <h3>结果是:{{result}}</h3>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstnumber: 0,
+                lastnumber:0,
+            },
+            // 计算属性 有缓存 多次取值 会走缓存
+            computed: {
+                result: function() {
+                    return parseInt(this.firstnumber) + parseInt(this.lastnumber)
+                }
+            },
+        });
+    
+    </script>
+</body>
+</html>
