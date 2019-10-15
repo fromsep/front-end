@@ -1,30 +1,21 @@
 <template>
   <div id="app">
-    <span>
-      <router-link to="/index">index</router-link>
-    </span>
-    <span>
-      <router-link to="/hello-world">HelloWorld</router-link>
-    </span>
-    <span>
-      <router-link to="/test">Test</router-link>
-    </span>
-
-    <router-view></router-view>
+    <router-link to="/index">Index</router-link>
+    <div class="mdui-container-fluid">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import Index from './components/Index.vue';
-import Test from './components/Test.vue';
+import Index from './views/Index'
 
 export default {
   name: 'app',
   components: {
     HelloWorld,
-    Index,
-    Test
+    Index
   }
 }
 </script>
@@ -37,8 +28,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-span {
-  margin-right: 10px;
 }
 </style>
