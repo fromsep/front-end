@@ -1,7 +1,7 @@
 <template>
     <div class="mdui-row">
         <div class="left mdui-col-md-3 mdui-col-xs-12">
-            <button @click="view">按钮</button>
+            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-indigo" @click="view">Button</button>
         </div>
         <div class="right mdui-col-md-3 mdui-col-xs-12">A</div>
         <div class="right mdui-col-md-3 mdui-col-xs-12">B</div>
@@ -13,23 +13,22 @@
 export default {
     methods: {
          view() {
-            //  let $$ = mdui.JQ
-             console.log(222)
+             console.log(this)
          },
     }
 }
 </script>
 
 <style scoped>
-    .mdui-row {
+    div.mdui-row {
         /* height: 500px; */
     }
     .left {
-        background-color: lightgray;
+        /* background-color: lightgray; */
         height: 500px;
     }
     .right {
-        background-color: lightgreen;
+        /* background-color: lightgreen; */
         height: 500px;
     }
 </style>
