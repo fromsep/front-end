@@ -1,18 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import MDUI from 'mdui'
+import mdui from 'mdui'
 
 import 'mdui/dist/css/mdui.css'
 import 'mdui/dist/js/mdui.js'
 
 Vue.config.productionTip = false
-Vue.use(MDUI)
 
-var vm = new Vue({
+Vue.prototype.$mdui = mdui
+
+new Vue({
   render: h => h(App),
   router
 }).$mount('#app')
-
-
-console.log(vm)
